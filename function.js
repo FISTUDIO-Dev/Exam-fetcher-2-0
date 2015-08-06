@@ -188,7 +188,6 @@ $(document).ready(function(){
         qa_checkbox_val = true;
         $('#quickaccess-toggle').prop('checked',true);
     }else{
-        console.log($.cookie('qa_checked'));
         qa_checkbox_val = false;
     }
 
@@ -207,7 +206,7 @@ $(document).ready(function(){
     });
 
 
-    //Enable auto prompting
+    //Enable auto prompting for quickaccess
     $('#field_div_id_'+ (fieldSet-1)+ '_subject').on('focusin',function () {
         if (qa_checkbox_val){
             $('#pageslide').show().animate({
@@ -235,6 +234,14 @@ $(document).ready(function(){
         }
     });
 
+    //Enable Tab for add new fields
+    $('#field_div_id_' + (fieldSet-1) + '_year').on('keydown',function(e){
+        var keyCode = e.keyCode || e.which;
+        if (keyCode == 9){
+            //Tab pressed
+            addField();
+        }
+    });
 });
 
 
@@ -351,6 +358,15 @@ function addField(){
         }
     });
 
+    //Re assign tab pressed
+    $('#field_div_id_'+(fieldSet-1)+'_year').keydown(function (e) {
+        var keyCode = e.keyCode || e.whichj ;
+        if (keyCode == 9){
+            //Tab pressed
+            addField();
+        }
+    });
+
     //Reveal remove button
     var removeBtn = document.getElementById('removeBtn');
     removeBtn.style.display = "inline";
@@ -369,6 +385,7 @@ $("body").on('submit','#sform',function(e){
 
     var postData = $(this).serializeArray();
     var formURL = 'function.php';
+
     $.ajax({
         url: formURL,
         type: "POST",
@@ -376,7 +393,7 @@ $("body").on('submit','#sform',function(e){
         success:function(data){
             // Remove fields
             var div = document.getElementById('single');
-            div.innerHTML = "<h3 style='text-align: center'>Here are the files that are retrieved. Download them individually or right click to download them all:) </h3></br>";
+            div.innerHTML = "<h3 style='text-align: center'>Here are the files that are retrieved. Download them individually or <strong style='color:red'>Right click</strong> to download them all:) </h3></br>";
             console.log(data);
             var jsonObj = $.parseJSON(data);
 
@@ -529,7 +546,7 @@ $('body').on('submit','#bform',function(e){
         success: function (data) {
             // Remove fields
             var div = document.getElementById('bulk');
-            div.innerHTML = "<h3 style='text-align: center'>Here are the files that are retrieved. Tap one of them or download them all using the button at the <a href='#'><b>TOP</b></a> of the page <br/> To reset, click the reload button in your browser </h3></br>";
+            div.innerHTML = "<h3 style='text-align: center'>Here are the files that are retrieved. Download them individually or <strong style='color:red'>right click</strong> to download them all:)  </h3></br>";
             var jsonObj = $.parseJSON(data);
 
             var bulkTableResult = document.createElement('table');
@@ -563,6 +580,7 @@ $('body').on('submit','#bform',function(e){
                     moreOptions.id = dlCounter2;
 
                     tdDownloadLinks.appendChild(moreOptions);
+                    tdDownloadLinks.innerHTML += "<br/>";
 
                     var hiddenLink = document.createElement('a');
                     hiddenLink.href = vlu;
@@ -829,14 +847,11 @@ $('#download-zip').click(function(e){
         data = analyseTable('table-result-single');
     }else if(mode == modeSet.BULK){
         data = analyseTable('table-result-bulk');
-    }else if(mode == modeSet.EXTRACTION){
-        //unsettled
     }
-
     var dataString = JSON.stringify(data);
 
     //Post for now
-    postResultData(dataString,"downloadZip");
+    postResultData(dataString,"download-zip");
 
     e.preventDefault();
 });
@@ -924,11 +939,13 @@ $('#reload-home-cache').click(function(e){
 $('#reset-table').click(function(e){
     if (mode == modeSet.SINGLE){
         document.getElementById('single').innerHTML = '<form id="sform" method="post"> <div id="container"> <div class="checkboxes" style="display: inline-block;margin: 0 auto;width:100%"> <p align="center"> <label> <input type="checkbox" class="checkbox" name="singlePaperChecked" checked/> Exams |</label> <label> <input type="checkbox" class="checkbox" name="singleReportChecked" checked/> Assessment reports </label> </p></div><div id="field_div_id_0"> <h5> Enter your subject </h5> <input type="text" placeholder="Type a few characters and select a subject" name="field_div_id_0_subject" id="field_div_id_0_subject" class="form__input ui-autocomplete-input" autocomplete="off" required="required"> <h5> Enter year </h5> <input type="text" placeholder="Type a few characters and select a year" name="field_div_id_0_year" id="field_div_id_0_year" class="form__input" required="required"> <br></div></div><div align="center" id="singleBtns" style="margin-bottom: 30px"> <a class="btn paper paper-raise-flatten" id="addBtn" onclick="addField()">Add a new subject field</a> <a class="btn paper paper-raise-flatten" id="removeBtn" onclick="removeField()" style="display: none;">Remove a subject field</a> </div><input type="submit" id="submit" value="Click to view the exam!"/> <input type="hidden" name="counter" id="counter"/> <input type="hidden" name="modeIndicator" id="modeIndicator" value="0"> <input type="hidden" name="action" id="action" value="fetch"> </form>';
+        //Reset field count
+        fieldSet = 1;
     }
     if (mode == modeSet.BULK){
         document.getElementById('bulk').innerHTML = '<form id="bform" method="post"> <div class="checkboxes" style="display: inline-block;margin: 0 auto;width:100%"> <p align="center"> <label> <input type="checkbox" class="checkbox" name="bulkPaperChecked" checked/> Exams |</label> <label> <input type="checkbox" class="checkbox" name="bulkReportChecked" checked/> Assessment reports </label> </p></div><div style=""> <h5>Enter your subjects:</h5> <input id="bulk_subject" placeholder="Type a few characters and select a subject" name="bulk_subject" class="form__input" style="width: 100% !important;"/> <h6>Notice: For subjects, please enter the name of subject from the beginning:<br/> E.g. When searching for "English As Additional Language", you should start by typing "Eng.." instead of "EAL". </h6> <h5>Enter years:</h5> <input id="bulk_year" placeholder="Type a few characters and select a year" name="bulk_year" class="form__input" style="width:100%; !important;"/> <div id="quick_year_selector" style="display: none"> <h5>From Year: <input type="text" name="from-year" id="from-year" class="form__input" style="display: inline;width: 20%"/> To Year: <input type="text" name="to-year" id="to-year" class="form__input" style="display: inline; width: 20%;"> <h6> Notice: By filling in the start and end year, you will fetch all the exams of years in between. </h6> </div></div><input type="submit" id="submit" name="submit" value="Click to view the exams!" style="margin-top: 20px"> <input type="hidden" id="modeIndicator" name="modeIndicator" value="1"> <input type="hidden" name="action" id="action" value="fetch"> </form>';
     }
-    //Link source for automcomplete
+    //Link source for autocomplete
     linkSource();
     e.preventDefault();
 });
@@ -1043,12 +1060,17 @@ function isDownloadAttrAvailable(){
 
 // manual create alert
 function createInformationalAlertWithTitleAndDelay(title,delay,isSuccess){
-    alertify.set({delay:delay});
-    if (isSuccess){
-        alertify.success(title);
+    if (typeof alertify != "undefined"){
+        alertify.set({delay:delay});
+        if (isSuccess){
+            alertify.success(title);
+        }else{
+            alertify.error(title);
+        }
     }else{
-        alertify.error(title);
+        alert(title);
     }
+
 }
 
 
@@ -1114,6 +1136,7 @@ function refreshUIFromLocalStorage(){
         document.getElementById('tag-recents').innerHTML = "";
 
         document.getElementById('tag-recents').appendChild(tag_ul_re);
+        document.getElementById('tag-recents').innerHTML+="<br/>";
     }else{
         localStorage['recents'] = JSON.stringify(placeholder_array);
         document.getElementById('tag-recents').innerHTML = "<h6>No Recents Here! Go and make some searches</h6>";
@@ -1150,7 +1173,6 @@ function refreshUIFromLocalStorage(){
 function addToRecentsBySubmit(){
     var limit = 6; var generatedArray = []; var currentRecents = JSON.parse(localStorage['recents']);
     //In single mode
-    console.log(modeSet.SINGLE);
     if (mode == modeSet.SINGLE){
         if (fieldSet+ currentRecents.length > limit){
             //exceeding limit

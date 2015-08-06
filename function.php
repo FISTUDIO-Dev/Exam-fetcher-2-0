@@ -18,10 +18,12 @@ if (isset($_GET['remotedownload'])){
 /*** POST METHODS ***/
 // Download
 if ($_POST['action'] == "download-zip"){
+    error_log("called??");
     //retrieve data
     $downloadData = json_decode($_POST['download'],true);
     //download to zip for now
     VCAAExamDownloader::downloadToZip($downloadData);
+
 }else if($_POST['action'] == "single-download"){
     $url = VCAAExamController::getBaseURLToLoad().$_POST['download'];
     //download

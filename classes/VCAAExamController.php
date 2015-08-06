@@ -71,7 +71,6 @@ class VCAAExamController {
             $subjects_array = $this->constructArraysInSingleMode()[0];
             $year_array = $this->constructArraysInSingleMode()[1];
         }
-
         if ($from && $to){
             $year_array = $this->constructYearArrayWithStartEnd($from,$to);
         }
@@ -213,7 +212,7 @@ class VCAAExamController {
     // (for single mode only) construct subjects array
     private function constructArraysInSingleMode(){
         // get number of fields
-        $numOfFields = count($_POST['counter']);
+        $numOfFields = $_POST['counter'];
         // loop through and construct
         $subjectsArray = array(); $yearsArray = array();
         for ($i = 0; $i < $numOfFields; $i ++){
@@ -228,7 +227,6 @@ class VCAAExamController {
         $collection = array();
         $collection[0] = $subjectsArray;
         $collection[1] = $yearsArray;
-
         return $collection;
     }
 
