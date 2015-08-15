@@ -30,7 +30,16 @@ class VCAAExamController {
     // Base urls
     private static $baseURL = "http://www.vcaa.vic.edu.au";
     private static $baseURLToLoad = "http://www.vcaa.vic.edu.au/pages/vce/exams/examsassessreports.aspx";
+    //Context with UA
+    private static $context;
 
+    /**
+     * @return resource
+     */
+    public static function getContext()
+    {
+        return self::$context;
+    }
     /**
      * @return string
      */
@@ -49,6 +58,9 @@ class VCAAExamController {
         $this->exam_paper = $paper;
         $this->exam_report = $report;
         $this->mode = $mode;
+        //Preload context
+        $options  = array('http' => array('user_agent' => 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)'));
+        self::$context  = stream_context_create($options);
         //Preload document
         $this->dom = file_get_html(TEMP_URL."home.html");
     }
@@ -60,25 +72,31 @@ class VCAAExamController {
         if (!$this->dom){
             exit();
         }
-        // Prep
-        $innerArray = array();
-        $outArray = array();
-        // Mode adjustment
+        // Mode derivation
         if ($this->mode == ExamFetchingMode::BULK){
+            if ($from && $to){
+                $year_array = $this->constructYearArrayWithStartEnd($from,$to);
+            }
             $subjects_array = $this->bulkStringToArray($subjects_array);
             $year_array = $this->bulkStringToArray($year_array);
         }elseif ($this->mode == ExamFetchingMode::SINGLE){
+            //TODO::FIX SINGLE ARRAY FETCHED FOR MULTIPLE YEARS PROBLEM
             $subjects_array = $this->constructArraysInSingleMode()[0];
             $year_array = $this->constructArraysInSingleMode()[1];
         }
-        if ($from && $to){
-            $year_array = $this->constructYearArrayWithStartEnd($from,$to);
-        }
+
 
         //loop through subjects
+        $outArray = $this->loopThroughSubjects($subjects_array,$year_array);
+
+        return json_encode($outArray);
+    }
+
+    private function loopThroughSubjects($subjects_array = array(),$year_array = array()){
+        $innerArray = array(); $outArray = array();
         for ($i = 0 ; $i < count($subjects_array); $i ++){
             //Retrieve DOM
-            $subjectDom = file_get_html($this->findGeneralSubjectURL((string)$subjects_array[$i]));
+            $subjectDom = file_get_html($this->findGeneralSubjectURL((string)$subjects_array[$i]),false,self::$context);
             //Get Exam Table from DOM
             foreach ($subjectDom->find('table[class=tablestyle4]') as $table){
                 //loop through years now
@@ -127,13 +145,12 @@ class VCAAExamController {
                     }
                 }
             }
-
             //Set outer array
             $outArray[$subjects_array[$i]] = $innerArray;
             $innerArray = null;
         }
+        return $outArray;
 
-        return json_encode($outArray);
     }
 
     /**
@@ -229,7 +246,6 @@ class VCAAExamController {
         $collection[1] = $yearsArray;
         return $collection;
     }
-
 }
 
 class VCAAExamDownloader{
@@ -320,7 +336,7 @@ class VCAAExamPageExtraOptions{
         //check if cache exists
         if (file_exists(TEMP_URL.'home.html')){
             // retrieve the file
-            $file = file_get_html(VCAAExamController::getBaseURLToLoad());
+            $file = file_get_html(VCAAExamController::getBaseURLToLoad(),false,VCAAExamController::getContext());
             // delete existing file
             unlink(TEMP_URL.'home.html');
             // load new file

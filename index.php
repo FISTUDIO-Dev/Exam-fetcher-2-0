@@ -3,6 +3,11 @@
 <head>
     <title>Exam Fetcher Beta</title>
     <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+    <meta name="description" content="VCAA exam fetcher is an easy web tool that is used to fetch VCAA past exam papers." />
+    <meta name="keywords" content="Exam, Fetcher, VCAA, FIStudio, web, tools, easy, fast" />
+    <meta name="author" content="metatags generator">
+    <meta name="robots" content="index, follow">
+    <meta name="revisit-after" content="3 month">
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -11,16 +16,34 @@
     <script src="assets/jquery-ui.js"></script>
     <link rel="stylesheet" href="assets/jquery-ui.css" />
     <link rel="stylesheet" href="assets/font-awesome.min.css" />
+    <!-- ICONS ---->
+    <link rel="apple-touch-icon" sizes="57x57" href="assets/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="assets/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="assets/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="assets/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="assets/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="assets/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="assets/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="assets/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="assets/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="assets/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
+    <link rel="manifest" href="assets/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
     <!-- Text Core Plugin -->
     <link rel="stylesheet" href="assets/textext.core.css" />
     <link rel="stylesheet" href="assets/textext.plugin.autocomplete.css" />
     <link rel="stylesheet" href="assets/textext.plugin.tags.css" />
-
     <script src="assets/textext.core.js"></script>
     <script src="assets/textext.plugin.autocomplete.js"></script>
     <script src="assets/textext.plugin.tags.js"></script>
     <script src="assets/textext.plugin.suggestions.js"></script>
     <script src="assets/textext.plugin.filter.js"></script>
+
     <script src="assets/jquery.cookie.js"></script>
 
     <!--Others-->
