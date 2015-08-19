@@ -535,6 +535,7 @@ $('body').on('submit','#bform',function(e){
             e.preventDefault();
             return false;
         }
+        $('#preloader').fadeIn();
     }else{
         $('#preloader').fadeIn();
     }
@@ -881,11 +882,25 @@ $('body').on('click','#share-exams',function(e){
         data = analyseTable('table-result-bulk');
     }
     var dataString = JSON.stringify(data);
-    var downloadURL = "/function.php?remotedownload="+dataString;
+    var downloadURL = document.domain+"/function.php?remotedownload="+dataString;
     // Put to text are
-    document.getElementById('modal-content').innerHTML = "<h3>Hey, i have some exams for you!</h3> <a style='text-decoration: underline' href='"+downloadURL+"'>Click to download them </a>";
-
-    console.log(downloadURL);
+    //document.getElementById('modal-content').innerHTML = "<h3>Hey, i have some exams for you!</h3> <a style='text-decoration: underline' href='"+downloadURL+"'>Click to download them </a>";
+    stWidget.addEntry({
+        "service":"email",
+        "element":document.getElementById('st_email'),
+        "url":downloadURL,
+        "title":"Share exams to your friends' email!",
+        "type":"large",
+        "summary":"Here's the link attached! Click to download now!"
+    });
+    stWidget.addEntry({
+        "service":"facebook",
+        "element":document.getElementById('st_fb'),
+        "url":downloadURL,
+        "title":"Share exams to your friends' email!",
+        "type":"large",
+        "summary":"Here's the link attached! Click to download now!"
+    });
 });
 
 // Post share exam email form

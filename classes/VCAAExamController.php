@@ -72,6 +72,7 @@ class VCAAExamController {
         if (!$this->dom){
             exit();
         }
+        $outArray = array();
         // Mode derivation
         if ($this->mode == ExamFetchingMode::BULK){
             $subjects_array = $this->bulkStringToArray($subjects_array);
@@ -79,15 +80,24 @@ class VCAAExamController {
             if ($from && $to){
                 $year_array = $this->constructYearArrayWithStartEnd($from,$to);
             }
+            $outArray = $this->loopThroughSubjects($subjects_array,$year_array);
+
         }elseif ($this->mode == ExamFetchingMode::SINGLE){
             //TODO::FIX SINGLE ARRAY FETCHED FOR MULTIPLE YEARS PROBLEM
-            $subjects_array = $this->constructArraysInSingleMode()[0];
-            $year_array = $this->constructArraysInSingleMode()[1];
+            $data = $this->constructDataInSingleMode();
+            $data_keys = array_keys($data);
+            for ($i = 0; $i < count($data_keys); $i ++){
+                $singleSubject = $data[$data_keys[$i]];
+                $singleSubjectYearArray = (array)$data[$singleSubject];
+                if (count($outArray) > 0){
+                    $newSubject = $this->loopThroughSubjects((array)$singleSubject,$singleSubjectYearArray);
+                    $outArray = array_merge($outArray,$newSubject);
+                }else{
+                    $outArray = $this->loopThroughSubjects((array)$singleSubject,$singleSubjectYearArray);
+                }
+            }
         }
-
-
         //loop through subjects
-        $outArray = $this->loopThroughSubjects($subjects_array,$year_array);
 
         return json_encode($outArray);
     }
@@ -95,6 +105,8 @@ class VCAAExamController {
     private function loopThroughSubjects($subjects_array = array(),$year_array = array()){
         $innerArray = array(); $outArray = array();
         for ($i = 0 ; $i < count($subjects_array); $i ++){
+            error_log($i);
+            error_log($subjects_array[$i]." haha");
             //Retrieve DOM
             $subjectDom = file_get_html($this->findGeneralSubjectURL((string)$subjects_array[$i]),false,self::$context);
             //Get Exam Table from DOM
@@ -245,7 +257,33 @@ class VCAAExamController {
         $collection[1] = $yearsArray;
         return $collection;
 
-        //TODO::FIX SINGLE MODE FETCHING
+    }
+
+    private function constructDataInSingleMode(){
+        // get num of fields
+        $numOfFields = $_POST['counter'];
+        // generating
+        $collection = array();
+        for ($i = 0; $i < $numOfFields; $i ++){
+            // get values
+            $subject = $_POST['field_div_id_'.$i.'_subject'];
+            $year = $_POST['field_div_id_'.$i.'_year'];
+
+            if (!in_array($subject,$collection)){
+                array_push($collection,$subject);
+            }
+            if (!isset($collection[$subject])){
+                $tmp = [$year];
+                $collection[$subject] = $tmp;
+            }else{
+                $tmp = $collection[$subject];
+                if (!in_array($year,$tmp)){
+                    array_push($tmp,$year);
+                }
+                $collection[$subject] = $tmp;
+            }
+        }
+        return $collection;
     }
 }
 

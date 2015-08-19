@@ -55,14 +55,31 @@
     <style>
 
     </style>
+
+    <script type="text/javascript">var switchTo5x=true;</script>
+    <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+    <script type="text/javascript">stLight.options({publisher: "7bbc3094-02cb-416d-a3b2-513f8c5c2b05"});</script>
 </head>
 
 <body>
 <div id="preloader">
-    <div class="spinner-container">
-        <svg class="spinner" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
-            <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
-        </svg>
+    <div class="body">
+  	<span>
+      	<span></span>
+      	<span></span>
+      	<span></span>
+      	<span></span>
+    </span>
+        <div class="base">
+            <span></span>
+            <div class="face"></div>
+        </div>
+    </div>
+    <div class="longfazers">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
     </div>
 </div>
 <div class="centered grid__col--8" id="main" style="margin-top: 5%">
@@ -97,21 +114,9 @@
             <div class="modal-inset">
                 <div class="button close-modal">Close</div>
                 <div class="modal-body">
-                    <form id="share-email-form" method="post">
-                        <h2>Share your exams !</h2>
-
-                        <input type="email" placeholder="Enter your email" id="modal-from-email" name="modal-from-email" required="required" class="form__input" />
-                        <input type="email" placeholder="Enter your friends Email" id="modal-to-email" name="modal-to-email" required="required" class="form__input" />
-
-                        <h4>Email Contents (Do not modify the link!)</h4>
-                        <div id="modal-content" name="modal-content" class="form__input" style="width:100%; padding: 10px" contenteditable="true"></div>
-                        <div id="progress">
-
-                        </div>
-                        <input type="hidden" name="content-value" id="content-value" />
-                        <input type="hidden" name="action" value="sendmail">
-                        <input type="submit" name="submit" value="Send Now!">
-                    </form>
+                    <h1>You can share the exam with following options.</h1>
+                    <span id="st_fb"</span>
+                    <span id="st_email" ></span>
                 </div>
             </div>
         </div>
@@ -179,11 +184,11 @@
                                     <h5>
                                         Enter your subject
                                     </h5>
-                                    <input type="text" placeholder="Type a few characters and select a subject" name="field_div_id_0_subject" id="field_div_id_0_subject" class="form__input ui-autocomplete-input" autocomplete="off" required="required">
+                                    <input type="text" placeholder="Type a few characters and select a subject" name="field_div_id_0_subject" id="field_div_id_0_subject" class="form__input ui-autocomplete-input" autocomplete="off" required="required" value="SpecialistMathematics">
                                     <h5>
                                         Enter year
                                     </h5>
-                                    <input type="text" placeholder="Type a few characters and select a year" name="field_div_id_0_year" id="field_div_id_0_year" class="form__input" required="required">
+                                    <input type="text" placeholder="Type a few characters and select a year" name="field_div_id_0_year" id="field_div_id_0_year" class="form__input" required="required" value="2014">
                                     <br>
                                 </div>
                             </div>
