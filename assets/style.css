@@ -395,7 +395,7 @@ h2, .headline-secondary, .headline-secondary--grouped {
     font-size: 0.875em;
     font-weight: 400;
     transition: opacity 0.3s;
-    display: block; }
+    display: inline; }
 .form__btn:hover, [class^="btn--"]:hover {
     opacity: .75; }
 .form__btn:active, [class^="btn--"]:active {

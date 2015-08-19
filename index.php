@@ -66,8 +66,8 @@
     </div>
 </div>
 <div class="centered grid__col--8" id="main" style="margin-top: 5%">
-    <h1 style="text-align: center">Welcome to VCAA Exam Fetcher V2.1 (Beta).</h1>
-    <h3 style="text-align: center"><a id="advanced-settings" style="text-decoration: underline; cursor: pointer;"> <i class="fa fa-cogs"></i> Advanced Settings</a></h3>
+    <h1 style="text-align: center">Welcome to VCAA Exam Fetcher V2.1.1 (Beta).</h1>
+    <h3 style="text-align: center"><a id="advanced-settings" style="text-decoration: underline; cursor: pointer;"> <i class="fa fa-cogs"></i> Advanced Settings (Use with caution!)</a></h3>
 
     <!-- Context Menu Download options -->
     <ul class="contextMenu" id="contextMenuDLOptions" hidden>
@@ -227,10 +227,9 @@
                             <h5>Enter years:</h5>
                             <input id="bulk_year" placeholder="Type a few characters and select a year" name="bulk_year" class="form__input" style="width:100%; !important;" />
                             <div id="quick_year_selector" style="display: none">
+                                <h3 style="text-align: center"><strong>OR</strong></h3>
+                                <h5>Get exams from a consecutive number of years! E.g. All the way from 2002 to 2014! </h5>
                                 <h5>From Year: <input type="text" name="from-year" id="from-year" class="form__input" style="display: inline;width: 20%" /> To Year: <input type="text" name="to-year" id="to-year" class="form__input" style="display: inline; width: 20%;">
-                                    <h6>
-                                        Notice: By filling in the start and end year, you will fetch all the exams of years in between.
-                                    </h6>
                             </div>
                         </div>
                         <input type="submit" id="submit" name="submit" value="Click to view the exams!" style="margin-top: 20px">

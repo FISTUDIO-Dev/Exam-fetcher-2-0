@@ -144,7 +144,7 @@ $(document).ready(function(){
         // NOT AVAILABLE FOR EXTRACTION MODE
     });
 
-    //TODO::Enable tag hovering to show delete menu
+    //Enable tag hovering to show delete menu
     $(document).on('mouseenter','.clickable-tags', function (event) {
         if ($('#del-popover').length < 1){
             $('body').append('<div style="display: none" id="del-popover"><a id="del-button" style="text-align: center;">Delete</a></div>');
@@ -393,7 +393,8 @@ $("body").on('submit','#sform',function(e){
         success:function(data){
             // Remove fields
             var div = document.getElementById('single');
-            div.innerHTML = "<h3 style='text-align: center'>Here are the files that are retrieved. Download them individually or <strong style='color:red'>Right click</strong> to download them all:) </h3></br>";
+            div.innerHTML = "<h3 style='text-align: center'>Here are the files that are retrieved. Download them individually by tapping the links in the table or download them all using buttons below:) </h3>" +
+            "<div align='center'> <a class='form__btn btn--info' id='download-zip'>Download all to zip</a> <a class='form__btn btn--success' id='share-exams'>Share these exams</a> <a class='form__btn btn--default' id='reset-table'>Reset the form</a> </div> <br/>";
             console.log(data);
             var jsonObj = $.parseJSON(data);
 
@@ -526,10 +527,14 @@ $('#bulk_year').focusin(function(e){
 $('body').on('submit','#bform',function(e){
 
     //Validate
-    if (!($('.text-tags')[0].hasChildNodes())){
-        alert("Please fill in the required fields");
-        e.preventDefault();
-        return false;
+    var subjectVal = $('input[type="hidden"][name="bulk_subject"]').val();
+    var yearVal = $('input[type="hidden"][name="bulk_year"]').val();
+    if (subjectVal.length <= 2 || yearVal.length <= 2){
+        if ($('#from-year').val().length <1 || $('#to-year').val().length<1 ) {
+            alert("Please fill in the required fields");
+            e.preventDefault();
+            return false;
+        }
     }else{
         $('#preloader').fadeIn();
     }
@@ -546,7 +551,9 @@ $('body').on('submit','#bform',function(e){
         success: function (data) {
             // Remove fields
             var div = document.getElementById('bulk');
-            div.innerHTML = "<h3 style='text-align: center'>Here are the files that are retrieved. Download them individually or <strong style='color:red'>right click</strong> to download them all:)  </h3></br>";
+            div.innerHTML = "<h3 style='text-align: center'>Here are the files that are retrieved. Download them individually by tapping the links in the table or download them all using buttons below:) </h3>" +
+            "<div align='center'> <a class='form__btn btn--info' id='download-zip'>Download all to zip</a> <a class='form__btn btn--success' id='share-exams'>Share these exams</a> <a class='form__btn btn--default' id='reset-table'>Reset the form</a> </div> <br/>";
+            console.log(data);
             var jsonObj = $.parseJSON(data);
 
             var bulkTableResult = document.createElement('table');
@@ -665,6 +672,10 @@ function linkSource(){
 
     $('#to-year').autocomplete({
         source: years
+    });
+
+    $('#bulk_year').focusin(function(e){
+        $('#quick_year_selector').slideDown();
     });
 
 }
@@ -839,7 +850,7 @@ $('#download-file').click(function(e){
     e.preventDefault();
 });
 
-$('#download-zip').click(function(e){
+$('body').on('click','#download-zip',function(e){
 
     var table; var data;
 
@@ -856,7 +867,7 @@ $('#download-zip').click(function(e){
     e.preventDefault();
 });
 
-$('#share-exams').click(function(e){
+$('body').on('click','#share-exams',function(e){
 
     // Open modal
     $overlay.addClass('state-show');
@@ -936,7 +947,7 @@ $('#reload-home-cache').click(function(e){
 });
 
 //Reload table
-$('#reset-table').click(function(e){
+$('body').on('click','#reset-table',function(e){
     if (mode == modeSet.SINGLE){
         document.getElementById('single').innerHTML = '<form id="sform" method="post"> <div id="container"> <div class="checkboxes" style="display: inline-block;margin: 0 auto;width:100%"> <p align="center"> <label> <input type="checkbox" class="checkbox" name="singlePaperChecked" checked/> Exams |</label> <label> <input type="checkbox" class="checkbox" name="singleReportChecked" checked/> Assessment reports </label> </p></div><div id="field_div_id_0"> <h5> Enter your subject </h5> <input type="text" placeholder="Type a few characters and select a subject" name="field_div_id_0_subject" id="field_div_id_0_subject" class="form__input ui-autocomplete-input" autocomplete="off" required="required"> <h5> Enter year </h5> <input type="text" placeholder="Type a few characters and select a year" name="field_div_id_0_year" id="field_div_id_0_year" class="form__input" required="required"> <br></div></div><div align="center" id="singleBtns" style="margin-bottom: 30px"> <a class="btn paper paper-raise-flatten" id="addBtn" onclick="addField()">Add a new subject field</a> <a class="btn paper paper-raise-flatten" id="removeBtn" onclick="removeField()" style="display: none;">Remove a subject field</a> </div><input type="submit" id="submit" value="Click to view the exam!"/> <input type="hidden" name="counter" id="counter"/> <input type="hidden" name="modeIndicator" id="modeIndicator" value="0"> <input type="hidden" name="action" id="action" value="fetch"> </form>';
         //Reset field count

@@ -74,11 +74,11 @@ class VCAAExamController {
         }
         // Mode derivation
         if ($this->mode == ExamFetchingMode::BULK){
+            $subjects_array = $this->bulkStringToArray($subjects_array);
+            $year_array = $this->bulkStringToArray($year_array);
             if ($from && $to){
                 $year_array = $this->constructYearArrayWithStartEnd($from,$to);
             }
-            $subjects_array = $this->bulkStringToArray($subjects_array);
-            $year_array = $this->bulkStringToArray($year_array);
         }elseif ($this->mode == ExamFetchingMode::SINGLE){
             //TODO::FIX SINGLE ARRAY FETCHED FOR MULTIPLE YEARS PROBLEM
             $subjects_array = $this->constructArraysInSingleMode()[0];
@@ -210,7 +210,6 @@ class VCAAExamController {
     private function bulkStringToArray($string){
         $replaceFrom = array("[","\"","]");
         $replaceTo = array("","","");
-
         $cleaned = str_replace($replaceFrom,$replaceTo,$string);
         $result = explode(",",$cleaned);
 
@@ -245,6 +244,8 @@ class VCAAExamController {
         $collection[0] = $subjectsArray;
         $collection[1] = $yearsArray;
         return $collection;
+
+        //TODO::FIX SINGLE MODE FETCHING
     }
 }
 
