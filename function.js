@@ -394,7 +394,7 @@ $("body").on('submit','#sform',function(e){
             // Remove fields
             var div = document.getElementById('single');
             div.innerHTML = "<h3 style='text-align: center'>Here are the files that are retrieved. Download them individually by tapping the links in the table or download them all using buttons below:) </h3>" +
-            "<div align='center'> <a class='form__btn btn--info' id='download-zip'>Download all to zip</a> <a class='form__btn btn--success' id='share-exams'>Share these exams</a> <a class='form__btn btn--default' id='reset-table'>Reset the form</a> </div> <br/>";
+            "<div align='center'>  <a class='form__btn btn--success' id='share-exams'>Share these exams</a> <a class='form__btn btn--info' id='download-zip'>Download all to zip</a>  <a class='form__btn btn--default' id='reset-table'>Reset the form</a> </div> <br/>";
             console.log(data);
             var jsonObj = $.parseJSON(data);
 
@@ -553,7 +553,7 @@ $('body').on('submit','#bform',function(e){
             // Remove fields
             var div = document.getElementById('bulk');
             div.innerHTML = "<h3 style='text-align: center'>Here are the files that are retrieved. Download them individually by tapping the links in the table or download them all using buttons below:) </h3>" +
-            "<div align='center'> <a class='form__btn btn--info' id='download-zip'>Download all to zip</a> <a class='form__btn btn--success' id='share-exams'>Share these exams</a> <a class='form__btn btn--default' id='reset-table'>Reset the form</a> </div> <br/>";
+            "<div align='center'>  <a class='form__btn btn--success' id='share-exams'>Share these exams</a> <a class='form__btn btn--info' id='download-zip'>Download all to zip</a> <a class='form__btn btn--default' id='reset-table'>Reset the form</a> </div> <br/>";
             console.log(data);
             var jsonObj = $.parseJSON(data);
 
@@ -677,6 +677,14 @@ function linkSource(){
 
     $('#bulk_year').focusin(function(e){
         $('#quick_year_selector').slideDown();
+    });
+
+    $('#field_div_id_' + (fieldSet-1) + '_year').on('keydown',function(e){
+        var keyCode = e.keyCode || e.which;
+        if (keyCode == 9){
+            //Tab pressed
+            addField();
+        }
     });
 
 }
@@ -969,7 +977,7 @@ $('body').on('click','#reset-table',function(e){
         fieldSet = 1;
     }
     if (mode == modeSet.BULK){
-        document.getElementById('bulk').innerHTML = '<form id="bform" method="post"> <div class="checkboxes" style="display: inline-block;margin: 0 auto;width:100%"> <p align="center"> <label> <input type="checkbox" class="checkbox" name="bulkPaperChecked" checked/> Exams |</label> <label> <input type="checkbox" class="checkbox" name="bulkReportChecked" checked/> Assessment reports </label> </p></div><div style=""> <h5>Enter your subjects:</h5> <input id="bulk_subject" placeholder="Type a few characters and select a subject" name="bulk_subject" class="form__input" style="width: 100% !important;"/> <h6>Notice: For subjects, please enter the name of subject from the beginning:<br/> E.g. When searching for "English As Additional Language", you should start by typing "Eng.." instead of "EAL". </h6> <h5>Enter years:</h5> <input id="bulk_year" placeholder="Type a few characters and select a year" name="bulk_year" class="form__input" style="width:100%; !important;"/> <div id="quick_year_selector" style="display: none"> <h5>From Year: <input type="text" name="from-year" id="from-year" class="form__input" style="display: inline;width: 20%"/> To Year: <input type="text" name="to-year" id="to-year" class="form__input" style="display: inline; width: 20%;"> <h6> Notice: By filling in the start and end year, you will fetch all the exams of years in between. </h6> </div></div><input type="submit" id="submit" name="submit" value="Click to view the exams!" style="margin-top: 20px"> <input type="hidden" id="modeIndicator" name="modeIndicator" value="1"> <input type="hidden" name="action" id="action" value="fetch"> </form>';
+        document.getElementById('bulk').innerHTML = '<form id="bform" method="post"> <div class="checkboxes" style="display: inline-block;margin: 0 auto;width:100%"> <p align="center"> <label> <input type="checkbox" class="checkbox" name="bulkPaperChecked" checked/> Exams |</label> <label> <input type="checkbox" class="checkbox" name="bulkReportChecked" checked/> Assessment reports </label> </p></div><div style=""> <h5>Enter your subjects:</h5> <input id="bulk_subject" placeholder="Type a few characters and select a subject" name="bulk_subject" class="form__input" style="width: 100% !important;"/> <h6>Notice: For subjects, please enter the name of subject from the beginning:<br/> E.g. When searching for "English As Additional Language", you should start by typing "Eng.." instead of "EAL". </h6> <h5>Enter years:</h5> <input id="bulk_year" placeholder="Type a few characters and select a year" name="bulk_year" class="form__input" style="width:100%; !important;"/> <div id="quick_year_selector" style="display: none"> <h3 style="text-align: center"><strong>OR</strong></h3> <h5>Get exams from a consecutive number of years! E.g. All the way from 2002 to 2014! </h5> <h5>From Year: <input type="text" name="from-year" id="from-year" class="form__input" style="display: inline;width: 20%"/> To Year: <input type="text" name="to-year" id="to-year" class="form__input" style="display: inline; width: 20%;"> </div></div><input type="submit" id="submit" name="submit" value="Click to view the exams!" style="margin-top: 20px"> <input type="hidden" id="modeIndicator" name="modeIndicator" value="1"> <input type="hidden" name="action" id="action" value="fetch"> </form>';
     }
     //Link source for autocomplete
     linkSource();

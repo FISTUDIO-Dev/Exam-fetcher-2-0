@@ -2,6 +2,7 @@
   position: relative;
   height: 50px !important;
   width: 100% !important;
+  background-color: #ffffff;
 }
 .text-core .text-wrap[style] {
   background: #fff;

@@ -85,10 +85,11 @@ class VCAAExamController {
         }elseif ($this->mode == ExamFetchingMode::SINGLE){
             //TODO::FIX SINGLE ARRAY FETCHED FOR MULTIPLE YEARS PROBLEM
             $data = $this->constructDataInSingleMode();
-            $data_keys = array_keys($data);
-            for ($i = 0; $i < count($data_keys); $i ++){
-                $singleSubject = $data[$data_keys[$i]];
-                $singleSubjectYearArray = (array)$data[$singleSubject];
+            for ($i = 0; $i < count($data); $i ++){
+                $singleSubject = $data[$i];
+                $singleSubjectYearArray = $data[$singleSubject];
+                error_log("Subject:".print_r($singleSubject,true));
+                error_log("Subject years:".print_r($singleSubjectYearArray,true));
                 if (count($outArray) > 0){
                     $newSubject = $this->loopThroughSubjects((array)$singleSubject,$singleSubjectYearArray);
                     $outArray = array_merge($outArray,$newSubject);
@@ -106,7 +107,7 @@ class VCAAExamController {
         $innerArray = array(); $outArray = array();
         for ($i = 0 ; $i < count($subjects_array); $i ++){
             error_log($i);
-            error_log($subjects_array[$i]." haha");
+            error_log($subjects_array[$i].": Subject Array[i]");
             //Retrieve DOM
             $subjectDom = file_get_html($this->findGeneralSubjectURL((string)$subjects_array[$i]),false,self::$context);
             //Get Exam Table from DOM

@@ -184,11 +184,11 @@
                                     <h5>
                                         Enter your subject
                                     </h5>
-                                    <input type="text" placeholder="Type a few characters and select a subject" name="field_div_id_0_subject" id="field_div_id_0_subject" class="form__input ui-autocomplete-input" autocomplete="off" required="required" value="SpecialistMathematics">
+                                    <input type="text" placeholder="Type a few characters and select a subject" name="field_div_id_0_subject" id="field_div_id_0_subject" class="form__input ui-autocomplete-input" autocomplete="off" required="required">
                                     <h5>
                                         Enter year
                                     </h5>
-                                    <input type="text" placeholder="Type a few characters and select a year" name="field_div_id_0_year" id="field_div_id_0_year" class="form__input" required="required" value="2014">
+                                    <input type="text" placeholder="Type a few characters and select a year" name="field_div_id_0_year" id="field_div_id_0_year" class="form__input" required="required">
                                     <br>
                                 </div>
                             </div>
