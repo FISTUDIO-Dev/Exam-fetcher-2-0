@@ -891,24 +891,27 @@ $('body').on('click','#share-exams',function(e){
     }
     var dataString = JSON.stringify(data);
     var downloadURL = document.domain+"/function.php?remotedownload="+dataString;
-    // Put to text are
-    //document.getElementById('modal-content').innerHTML = "<h3>Hey, i have some exams for you!</h3> <a style='text-decoration: underline' href='"+downloadURL+"'>Click to download them </a>";
-    stWidget.addEntry({
-        "service":"email",
-        "element":document.getElementById('st_email'),
-        "url":downloadURL,
-        "title":"Share exams to your friends' email!",
-        "type":"large",
-        "summary":"Here's the link attached! Click to download now!"
-    });
-    stWidget.addEntry({
-        "service":"facebook",
-        "element":document.getElementById('st_fb'),
-        "url":downloadURL,
-        "title":"Share exams to your friends' email!",
-        "type":"large",
-        "summary":"Here's the link attached! Click to download now!"
-    });
+
+    //Add entry if i can
+    if (!$('#st_email').children.length > 0){
+        stWidget.addEntry({
+            "service":"email",
+            "element":document.getElementById('st_email'),
+            "url":downloadURL,
+            "title":"Share exams to your friends' email!",
+            "type":"large",
+            "summary":"Here's the link attached! Click to download now!"
+        });
+        stWidget.addEntry({
+            "service":"facebook",
+            "element":document.getElementById('st_fb'),
+            "url":downloadURL,
+            "title":"Share exams to your friends' email!",
+            "type":"large",
+            "summary":"Here's the link attached! Click to download now!"
+        });
+    }
+
 });
 
 // Post share exam email form

@@ -115,7 +115,8 @@
                 <div class="button close-modal">Close</div>
                 <div class="modal-body">
                     <h1>You can share the exam with following options.</h1>
-                    <span id="st_fb"</span>
+                    <br/>
+                    <span id="st_fb"></span>
                     <span id="st_email" ></span>
                 </div>
             </div>
@@ -152,7 +153,7 @@
     <div class="tab">
 
         <!-- Tab switches -->
-        <div align="center">
+        <div class="centered grid__col--8">
             <ul class="tabs">
                 <li><a href="#">Single mode</a></li>
                 <li><a href="#">Bulk mode</a></li>
