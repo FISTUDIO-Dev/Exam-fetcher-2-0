@@ -110,8 +110,9 @@ elseif  ($_POST['action'] == "print"){
 }elseif ($_POST['action'] == "ext_download"){
     //get data
     $file = REPO_URL.$_POST['ext_selected'];
+    $filename = $_POST['ext_subject'];
     header("Content-Type: application/octet-stream");
-    header("Content-Disposition: attachment; filename=" . urlencode($file));
+    header("Content-Disposition: attachment; filename=" .$filename);
     header("Content-Type: application/octet-stream");
     header("Content-Type: application/download");
     header("Content-Description: File Transfer");

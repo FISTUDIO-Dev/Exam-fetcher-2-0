@@ -629,7 +629,7 @@ $('body').on('submit','#bform',function(e){
             $('#preloader').fadeOut();
             console.log("ERROR");
             // Error
-            createInformationalAlertWithTitleAndDelay("Erro! Please report!",1700,false);
+            createInformationalAlertWithTitleAndDelay("Error! Please report!",1700,false);
         }
     });
 
