@@ -263,13 +263,16 @@ $(window).load(function() {
 
     //link to source
     $('#field_div_id_0_subject').autocomplete({
-        source: searchIndex
+        source: searchIndex,
+        autoFocus:true
     });
     $('#field_div_id_0_year').autocomplete({
-        source: years
+        source: years,
+        autoFocus:true
     });
     $('#ext_subject').autocomplete({
-        source: extractionData
+        source: extractionData,
+        autoFocus:true
     });
 
     //prevent enter to submit in front form
@@ -321,11 +324,13 @@ function addField(){
 
     //Link sources
     $('#field_div_id_'+ fieldSet +'_subject').autocomplete({
-        source:searchIndex
+        source:searchIndex,
+        autoFocus:true
     });
 
     $('#filed_div_id' + fieldSet + '_year').autocomplete({
-        source:years
+        source:years,
+        autoFocus:true
     });
 
     fieldSet++;
@@ -393,8 +398,8 @@ $("body").on('submit','#sform',function(e){
         success:function(data){
             // Remove fields
             var div = document.getElementById('single');
-            div.innerHTML = "<h3 style='text-align: center'>Here are the files that are retrieved. Download them individually by tapping the links in the table or download them all using buttons below:) </h3>" +
-            "<div align='center'>  <a class='form__btn btn--success' id='share-exams'>Share these exams</a> <a class='form__btn btn--info' id='download-zip'>Download all to zip</a>  <a class='form__btn btn--default' id='reset-table'>Reset the form</a> </div> <br/>";
+            div.innerHTML = "<h3 style='text-align: center'>Check out the exams downloaded in the table below! Or you can <b>DOWNLOAD THEM ALL</b> using the button below.</h3>" +
+            "<div align='center'> <a class='form__btn btn--info' id='download-zip'><strong>Download all to zip</strong></a>  <h3 style='text-align: center'>OR</h3> <a class='form__btn btn--success' id='share-exams'>Share these exams</a> <a class='form__btn btn--default' id='reset-table'>Reset the form</a> </div> <br/>";
             console.log(data);
             var jsonObj = $.parseJSON(data);
 
@@ -508,15 +513,18 @@ $('#bulk_year').textext({
 });
 
 $('#add-fav-field').autocomplete({
-    source: searchIndex
+    source: searchIndex,
+    autoFocus:true
 });
 
 $('#from-year').autocomplete({
-    source: years
+    source: years,
+    autoFocus:true
 });
 
 $('#to-year').autocomplete({
-   source: years
+    source: years,
+    autoFocus:true
 });
 
 $('#bulk_year').focusin(function(e){
@@ -552,8 +560,8 @@ $('body').on('submit','#bform',function(e){
         success: function (data) {
             // Remove fields
             var div = document.getElementById('bulk');
-            div.innerHTML = "<h3 style='text-align: center'>Here are the files that are retrieved. Download them individually by tapping the links in the table or download them all using buttons below:) </h3>" +
-            "<div align='center'>  <a class='form__btn btn--success' id='share-exams'>Share these exams</a> <a class='form__btn btn--info' id='download-zip'>Download all to zip</a> <a class='form__btn btn--default' id='reset-table'>Reset the form</a> </div> <br/>";
+            div.innerHTML = "<h3 style='text-align: center'>Check out the exams downloaded in the table below! Or you can <b>DOWNLOAD THEM ALL</b> using the button below.</h3>" +
+            "<div align='center'> <a class='form__btn btn--info' id='download-zip'><strong>Download all to zip</strong></a>  <h3 style='text-align: center'>OR</h3> <a class='form__btn btn--success' id='share-exams'>Share these exams</a> <a class='form__btn btn--default' id='reset-table'>Reset the form</a> </div> <br/>";
             console.log(data);
             var jsonObj = $.parseJSON(data);
 
@@ -647,10 +655,12 @@ $('#eform').submit(function(e){
 function linkSource(){
     //link to source
     $('#field_div_id_0_subject').autocomplete({
-        source: searchIndex
+        source: searchIndex,
+        autoFocus:true
     });
     $('#field_div_id_0_year').autocomplete({
-        source: years
+        source: years,
+        autoFocus:true
     });
 
     $('#bulk_subject').textext({
@@ -664,15 +674,18 @@ function linkSource(){
     });
 
     $('#add-fav-field').autocomplete({
-        source: searchIndex
+        source: searchIndex,
+        autoFocus:true
     });
 
     $('#from-year').autocomplete({
-        source: years
+        source: years,
+        autoFocus:true
     });
 
     $('#to-year').autocomplete({
-        source: years
+        source: years,
+        autoFocus:true
     });
 
     $('#bulk_year').focusin(function(e){
@@ -893,25 +906,28 @@ $('body').on('click','#share-exams',function(e){
     var downloadURL = document.domain+"/function.php?remotedownload="+dataString;
 
     //Add entry if i can
-    if (!$('#st_email').children.length > 0){
-        stWidget.addEntry({
+    stWidget.addEntry({
             "service":"email",
             "element":document.getElementById('st_email'),
             "url":downloadURL,
             "title":"Share exams to your friends' email!",
             "type":"large",
             "summary":"Here's the link attached! Click to download now!"
-        });
-        stWidget.addEntry({
+    });
+    stWidget.addEntry({
             "service":"facebook",
             "element":document.getElementById('st_fb'),
             "url":downloadURL,
             "title":"Share exams to your friends' email!",
             "type":"large",
             "summary":"Here's the link attached! Click to download now!"
-        });
-    }
+    });
 
+
+    $('#generate-link').click(function (e) {
+        window.prompt("Link is generated! Use Ctrl+C to copy!",downloadURL);
+        e.preventDefault();
+    });
 });
 
 // Post share exam email form

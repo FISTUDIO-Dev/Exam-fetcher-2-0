@@ -83,7 +83,7 @@
     </div>
 </div>
 <div class="centered grid__col--8" id="main" style="margin-top: 5%">
-    <h1 style="text-align: center">Welcome to VCAA Exam Fetcher V2.1.1 (Beta).</h1>
+    <h1 style="text-align: center">Welcome to VCAA Exam Fetcher V2.1.2 (Post-Beta).</h1>
     <h3 style="text-align: center"><a id="advanced-settings" style="text-decoration: underline; cursor: pointer;"> <i class="fa fa-cogs"></i> Advanced Settings (Use with caution!)</a></h3>
 
     <!-- Context Menu Download options -->
@@ -114,10 +114,12 @@
             <div class="modal-inset">
                 <div class="button close-modal">Close</div>
                 <div class="modal-body">
-                    <h1>You can share the exam with following options.</h1>
+                    <h3>You can share the exam with following options.</h3>
                     <br/>
                     <span id="st_fb"></span>
                     <span id="st_email" ></span>
+                    <h3>Or Generate a download link!</h3>
+                    <button id="generate-link">GENERATE!</button>
                 </div>
             </div>
         </div>
@@ -153,7 +155,7 @@
     <div class="tab">
 
         <!-- Tab switches -->
-        <div class="centered grid__col--8">
+        <div class="centered">
             <ul class="tabs">
                 <li><a href="#">Single mode</a></li>
                 <li><a href="#">Bulk mode</a></li>
@@ -247,8 +249,8 @@
 
             <div class="tabs_item" id="extraction_mode_tab">
                 <div class="extraction">
-                    <h5>Extraction mode provides a single gateway for extracting exam appendices, including formula sheet, data boolets etc... This database is
-                    constantly updating. If you want your subject's extraction to be added, please contact <a href="mailto:info@fistudio.net">info@fistudio.net</a> </h5>
+                    <h3>Extraction mode provides a single gateway for extracting exam appendices, including formula sheet, data boolets etc... This database is
+                    constantly updating. If you want your subject's extraction to be added, please contact <a href="mailto:service@fistudio.net">service@fistudio.net</a> </h3>
                     <form id="eform" method="post" action="function.php">
                         <div>
                             <h5>Enter a subject:</h5>
@@ -273,7 +275,7 @@
     </iframe>
     <!-- More Info -->
     <h5 style="text-align: center;"> This tool is under FISTUDIO&copy |Easy Exam Fetching Experience From 2002 - <?php echo date("Y")-1 ?> | We use cookie to enhance your fetching experience.</h5>
-    <h5 style="text-align: center"> <a href="http://fistudio.net/?p=371" target="_blank" style="text-decoration: underline">Future Developments and change logs</a> | Report a bug to <a style="text-decoration: underline" href=mailto:info@fistudio.net>FISTUDIO</a> </h5>
+    <h5 style="text-align: center"> <a href="http://fistudio.net/?p=371" target="_blank" style="text-decoration: underline">Future Developments and change logs</a> | Report a bug to <a style="text-decoration: underline" href=mailto:service@fistudio.net>FISTUDIO</a> </h5>
 
 </div>
 <script src="assets/php.js" type="text/javascript"></script>
