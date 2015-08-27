@@ -47,18 +47,17 @@
     <script src="assets/jquery.cookie.js"></script>
 
     <!--Others-->
-    <script src='http://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.0/js/foundation.min.js'></script>
+    <script src='assets/foundation.min.js'></script>
     <script src="assets/alert.js"></script>
 
     <link rel="stylesheet" href="assets/style.css" />
 
-    <style>
-
-    </style>
-
     <script type="text/javascript">var switchTo5x=true;</script>
     <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
     <script type="text/javascript">stLight.options({publisher: "7bbc3094-02cb-416d-a3b2-513f8c5c2b05"});</script>
+    <style>
+
+    </style>
 </head>
 
 <body>
@@ -108,18 +107,17 @@
         <li><a id="print-this-one"><i class="fa fa-print"></i> Print this one</a></li>
     </ul>
 
-    <!-- Modal Send Mail -->
+    <!-- Modal Share Exams -->
     <div class="modal-frame">
         <div class="modal">
             <div class="modal-inset">
                 <div class="button close-modal">Close</div>
                 <div class="modal-body">
                     <h3>You can share the exam with following options.</h3>
-                    <br/>
                     <span id="st_fb"></span>
                     <span id="st_email" ></span>
                     <h3>Or Generate a download link!</h3>
-                    <button id="generate-link">GENERATE!</button>
+                    <button id="generate-link" style="color: #0b0b0b">GENERATE!</button>
                 </div>
             </div>
         </div>
@@ -279,6 +277,7 @@
 
 </div>
 <script src="assets/php.js" type="text/javascript"></script>
+
 <script src="function.js" type="text/javascript"></script>
 <script>
     //tracking

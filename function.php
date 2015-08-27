@@ -10,7 +10,7 @@ require_once "classes/VCAAExamController.php";
 /*** GET METHODS ***/
 if (isset($_GET['remotedownload'])){
     //retrieve data
-    $downloadData = json_decode($_GET['remotedownload'],true);
+    $downloadData = json_decode(base64_decode($_GET['remotedownload']),true);
     //download to zip
     VCAAExamDownloader::downloadToZip($downloadData);
 }
