@@ -12,10 +12,11 @@
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 
-    <script src="assets/jquery-2.1.3.min.js"></script>
-    <script src="assets/jquery-ui.js"></script>
     <link rel="stylesheet" href="assets/jquery-ui.css" />
     <link rel="stylesheet" href="assets/font-awesome.min.css" />
+    <script src="assets/jquery-2.1.3.min.js"></script>
+    <script src="assets/jquery-ui.js"></script>
+
     <!-- ICONS ---->
     <link rel="apple-touch-icon" sizes="57x57" href="assets/apple-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="assets/apple-icon-60x60.png">
@@ -61,7 +62,7 @@
 </head>
 
 <body>
-<div id="preloader">
+<div id="preloader" style="display: none">
     <div class="body">
   	<span>
       	<span></span>
@@ -277,7 +278,6 @@
 
 </div>
 <script src="assets/php.js" type="text/javascript"></script>
-
 <script src="function.js" type="text/javascript"></script>
 <script>
     //tracking

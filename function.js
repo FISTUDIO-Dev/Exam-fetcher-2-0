@@ -258,9 +258,6 @@ $(window).load(function() {
     for (var key in extractionList){
         extractionData.push(key);
     }
-
-    hidePreloader();
-
     //link to source
     $('#field_div_id_0_subject').autocomplete({
         source: searchIndex,
@@ -654,11 +651,11 @@ $('#eform').submit(function(e){
 // Link sources
 function linkSource(){
     //link to source
-    $('#field_div_id_0_subject').autocomplete({
+    $('#field_div_id_'+(fieldSet-1)+'_subject').autocomplete({
         source: searchIndex,
         autoFocus:true
     });
-    $('#field_div_id_0_year').autocomplete({
+    $('#field_div_id_'+(fieldSet-1)+'_year').autocomplete({
         source: years,
         autoFocus:true
     });
@@ -690,6 +687,8 @@ function linkSource(){
             addField();
         }
     });
+
+
 
 }
 
