@@ -906,23 +906,24 @@ $('body').on('click','#share-exams',function(e){
     var downloadURL = document.domain+"/function.php?remotedownload="+dataString;
 
     //Add entry if i can
-    stWidget.addEntry({
+    if ($('#st_fb').children.length < 1){
+        stWidget.addEntry({
             "service":"email",
             "element":document.getElementById('st_email'),
             "url":downloadURL,
             "title":"Share exams to your friends' email!",
             "type":"large",
             "summary":"Here's the link attached! Click to download now!"
-    });
-    stWidget.addEntry({
+        });
+        stWidget.addEntry({
             "service":"facebook",
             "element":document.getElementById('st_fb'),
             "url":downloadURL,
             "title":"Share exams to your friends' email!",
             "type":"large",
             "summary":"Here's the link attached! Click to download now!"
-    });
-
+        });
+    }
 
     $('#generate-link').click(function (e) {
         window.prompt("Link is generated! Use Ctrl+C to copy!",downloadURL);
