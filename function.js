@@ -676,9 +676,19 @@ function linkSource(){
         autoFocus:true
     });
 
+    $('#bulk_subject').textext({
+        plugins: 'autocomplete suggestions tags filter',
+        suggestions: searchIndex
+    });
+
+    $('#bulk_year').textext({
+        plugins: 'autocomplete suggestions tags filter',
+        suggestions: years
+    });
     $('#bulk_year').focusin(function(e){
         $('#quick_year_selector').slideDown();
     });
+
 
     $('#field_div_id_' + (fieldSet-1) + '_year').on('keydown',function(e){
         var keyCode = e.keyCode || e.which;
