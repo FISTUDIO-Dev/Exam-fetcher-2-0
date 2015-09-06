@@ -194,24 +194,32 @@ $(document).ready(function(){
     if (parseInt($.cookie('qa_checked')) == 1){
         qa_checkbox_val = true;
         $('#quickaccess-toggle').prop('checked',true);
+        $('a#toggle-auto-quickaccess').attr('title','Turned On');
+
     }else{
         qa_checkbox_val = false;
+        $('a#toggle-auto-quickaccess').attr('title','Turned Off');
+
     }
 
 
     //Enable checkbox value change
-    $('#quickaccess-toggle').on('change',function(){
-        $value = $('#quickaccess-toggle').prop('checked');
+    $('input#quickaccess-toggle').on('click',function(){
+        $value = this.checked;
         qa_checkbox_val = $value;
         if (qa_checkbox_val == true){
+            //enabled
             $value = 1;
+            $('a#toggle-auto-quickaccess').attr('title','Turned On');
         }else{
+            //Disabled
             $value = 0;
+            $('a#toggle-auto-quickaccess').attr('title','Turned Off');
+
         }
         //Write to cookie
         $.cookie('qa_checked', $value, { expires: 9999999, path: '/' });
     });
-
 
     //Enable auto prompting for quickaccess
     $('#field_div_id_'+ (fieldSet-1)+ '_subject').on('focusin',function () {
