@@ -62,8 +62,10 @@ $(document).ready(function(){
     $(document).tooltip();
 
     //Enable modal
-    $modal = $('.modal-frame');
+    $modal = $('#modal-exam');
+    $modal_settings = $('#modal-settings');
     $overlay = $('.modal-overlay');
+
 
     $modal.bind('webkitAnimationEnd oanimationend msAnimationEnd animationend', function(e){
         if($modal.hasClass('state-leave')) {
@@ -71,9 +73,14 @@ $(document).ready(function(){
         }
     });
 
-    $('.close-modal').on('click', function(){
+    $('#close-exam').on('click', function(){
         $overlay.removeClass('state-show');
         $modal.removeClass('state-appear').addClass('state-leave');
+    });
+
+    $('#close-settings').on('click',function(){
+        $overlay.removeClass('state-show');
+        $modal_settings.removeClass('state-appear').addClass('state-leave').removeClass('state-leave');
     });
 
     //Enable slide menu control
@@ -962,12 +969,10 @@ $('#share-email-form').submit(function(e){
 });
 
 //Assign click to advanced settings
-$('#advanced-settings').on('mouseover',function(event){
-    event.preventDefault();
-    $('ul#contextMenuAdvancedSettings').show().css({
-        top: event.pageY+5,
-        left: event.pageX
-    });
+$('#advanced-settings').on('click',function(event){
+    // Open modal
+    $overlay.addClass('state-show');
+    $modal_settings.removeClass('state-leave').addClass('state-appear');
 });
 
 //Reload cache clicked
@@ -984,7 +989,7 @@ $('#reload-home-cache').click(function(e){
             createInformationalAlertWithTitleAndDelay(response,1000,true);
         },
         error: function(response){
-
+            createInformationalAlertWithTitleAndDelay(response,1000,false);
         }
     });
 });

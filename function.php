@@ -112,7 +112,7 @@ elseif  ($_POST['action'] == "print"){
     $file = REPO_URL.$_POST['ext_selected'];
     $filename = $_POST['ext_subject'];
     header("Content-Type: application/octet-stream");
-    header("Content-Disposition: attachment; filename=" .$filename);
+    header("Content-Disposition: attachment; filename=" .$filename.'.pdf');
     header("Content-Type: application/octet-stream");
     header("Content-Type: application/download");
     header("Content-Description: File Transfer");

@@ -83,7 +83,7 @@
     </div>
 </div>
 <div class="centered grid__col--8" id="main" style="margin-top: 5%">
-    <h1 style="text-align: center">Welcome to VCAA Exam Fetcher V2.1.2 (Post-Beta).</h1>
+    <h1 style="text-align: center">Welcome to VCAA Exam Fetcher V2.2.3 (Gamma).</h1>
     <h3 style="text-align: center"><a id="advanced-settings" style="text-decoration: underline; cursor: pointer;"> <i class="fa fa-cogs"></i> Advanced Settings (Use with caution!)</a></h3>
 
     <!-- Context Menu Download options -->
@@ -98,8 +98,6 @@
     <ul class="contextMenu" id="contextMenuAdvancedSettings" hidden>
         <li><a id="reload-home-cache" title="Use it when you have errors fetching your exam"><i class="fa fa-exclamation-triangle"></i> Reload Cache </a></li>
         <li><a id="toggle-auto-quickaccess" title="Tick it to present quick access panel when typing"> Enable auto quickaccess <input type="checkbox" class="checkbox" name="quickaccess-toggle" id="quickaccess-toggle" style="display: inline"> </a></li>
-        <!--<li title="Use it for faster experience, but remember to delete them later"> Enable Super Cache: <input type="checkbox" class="checkbox" name="super-cache-checked" id="super-cache-checked" style="display: inline"> </li>
-    <li><a id="delete-super-cache" title="Use it when you cannot fetch latest exams"><i class="fa fa-exclamation-triangle"></i> Delete Super Cache </a> </li>-->
     </ul>
 
     <!-- Context Menu More Options -->
@@ -109,10 +107,10 @@
     </ul>
 
     <!-- Modal Share Exams -->
-    <div class="modal-frame">
+    <div class="modal-frame" id="modal-exam">
         <div class="modal">
             <div class="modal-inset">
-                <div class="button close-modal">Close</div>
+                <div class="button close-modal" id="close-exam">Close</div>
                 <div class="modal-body">
                     <h3>You can share the exam with following options.</h3>
                     <span id="st_fb"></span>
@@ -124,7 +122,38 @@
         </div>
     </div>
 
+    <div class="modal-frame" id="modal-settings">
+        <div class="modal">
+            <div class="modal-inset">
+                <div class="button close-modal" id="close-settings">Close</div>
+                <div class="modal-body">
+                    <h3>Advanced settings:</h3>
+                    <a class="btn paper" id="reload-home-cache" title="Use it when you get error prompt all the time"><i class="fa fa-exclamation-triangle"></i> Reload Cache </a><br/><br/>
+                    <label id="toggle-auto-quickaccess" title="Tick it to present quick access panel when typing"> Enable auto quickaccess <input type="checkbox" class="checkbox" name="quickaccess-toggle" id="quickaccess-toggle" style="display: inline-block"> </label>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
     <div class="modal-overlay"></div>
+
+    <div id="container-floating">
+        <div class="nd5 nds" data-toggle="tooltip" data-placement="left" data-original-title="Simone"></div>
+        <div class="nd4 nds" data-toggle="tooltip" data-placement="left" data-original-title="contract@gmail.com">
+            <img class="reminder">
+            <p class="letter">C</p>
+        </div>
+        <div class="nd3 nds" data-toggle="tooltip" data-placement="left" data-original-title="Reminder"><img class="reminder" src="//ssl.gstatic.com/bt/C3341AA7A1A076756462EE2E5CD71C11/1x/ic_reminders_speeddial_white_24dp.png" /></div>
+        <div class="nd1 nds" data-toggle="tooltip" data-placement="left" data-original-title="Edoardo@live.it">
+            <img class="reminder">
+            <p class="letter">E</p>
+        </div>
+        <div id="floating-button" data-toggle="tooltip" data-placement="left" data-original-title="Create" onclick="newmail()">
+            <p class="plus_float">+</p>
+            <img class="edit" src="http://ssl.gstatic.com/bt/C3341AA7A1A076756462EE2E5CD71C11/1x/bt_compose2_1x.png">
+        </div>
+    </div>
 
     <!-- Slide Menu & Tag-Cloud -->
     <div class="slideItWrapper">
@@ -182,7 +211,6 @@
                                     </p>
                                 </div>
                                 <div id="field_div_id_0">
-
                                     <h5>
                                         Enter your subject
                                     </h5>
