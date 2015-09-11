@@ -204,7 +204,6 @@ $(document).ready(function(){
 
     }
 
-
     //Enable checkbox value change
     $('input#quickaccess-toggle').on('click',function(){
         $value = this.checked;
@@ -260,16 +259,17 @@ $(document).ready(function(){
         }
     });
 
-    //Add share to facebook
     stWidget.addEntry({
-        "service":"facebook",
-        "element":document.getElementById('fb-share'),
+        "service":"sharethis",
+        "element":document.getElementById('share_container'),
         "url":document.domain,
-        "title":"Share exam fetcher on facebook",
-        "summary":"I am using exam fetcher from FIStudio! A great tool to easily view/download exams from VCAA website!"
+        "title":"Share exam fetcher to your friends!",
+        "type":"large",
+        "text":"Share this" ,
+        "summary":"Your spread will be a great support for us to improve!"
     });
 
-
+    //center tabs
 });
 
 
@@ -310,6 +310,7 @@ $(window).load(function() {
             return false;
         }
     });
+
 
 
 
@@ -956,6 +957,7 @@ $('body').on('click','#share-exams',function(e){
             "type":"large",
             "summary":"Here's the link attached! Click to download now!"
         });
+
     }
 
     $('#generate-link').click(function (e) {
@@ -1059,6 +1061,7 @@ $('#fav-add-btn').click(function(){
 });
 
 
+
 //Analyse the result table and make up JSON data
 function analyseTable(tableID){
     var data = [];
@@ -1158,6 +1161,7 @@ function createInformationalAlertWithTitleAndDelay(title,delay,isSuccess){
 
 }
 
+// show/hide preloader
 function showPreloader(){
     $('#preloader').fadeIn();
     $overlay = $('.modal-overlay');

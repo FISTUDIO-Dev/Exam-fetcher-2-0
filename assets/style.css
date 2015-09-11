@@ -868,9 +868,7 @@ label {
     position: relative;
     overflow: hidden;
     margin:0 auto;
-    width: 100%;
-    left:25%;
-    right:25%;
+    padding-right: 5%;
 }
 .tabs li {
     float: left;
@@ -1949,7 +1947,7 @@ section {
 }
 
 .nd3{
-    background: #3c80f6;
+    background: #00bf00;
     right: 30px;
     bottom: 170px;
     animation-delay: 0.15s;
@@ -2017,3 +2015,8 @@ section {
     margin: auto;
     right: 20px;
 }
+
+.letter .stButton{
+    margin-top: 22%;
+}
+

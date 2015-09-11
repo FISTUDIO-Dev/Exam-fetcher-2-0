@@ -55,7 +55,7 @@
 
     <script type="text/javascript">var switchTo5x=true;</script>
     <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
-    <script type="text/javascript">stLight.options({publisher: "7bbc3094-02cb-416d-a3b2-513f8c5c2b05"});</script>
+    <script type="text/javascript">stLight.options({publisher: "7bbc3094-02cb-416d-a3b2-513f8c5c2b05", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
     <style>
 
     </style>
@@ -150,8 +150,8 @@
     <!--- Floating Buttons -->
     <div id="container-floating">
 
-        <div title="Share to facebook" class="nd3 nds" id="fb-share">
-            <p class="letter"><i style="margin-top: 30%" class="fa fa-share-alt-square"></i></p>
+        <div title="Share to facebook" class="nd3 nds" id="site_share">
+            <p class="letter" id="share_container"></p>
         </div>
         <div title="Unihigh Login" class="nd1 nds" id="unihigh-login">
             <p class="letter"><i style="margin-top: 30%" class="fa fa-sign-in"></i></p>
@@ -192,7 +192,7 @@
 
         <!-- Tab switches -->
         <div class="centered">
-            <ul class="tabs">
+            <ul class="tabs"  id="tab-switch">
                 <li><a href="#">Single mode</a></li>
                 <li><a href="#">Bulk mode</a></li>
                 <li><a href="#">Extraction mode</a></li>
@@ -309,6 +309,11 @@
 
     </iframe>
     <!-- More Info -->
+    <div align="center" id="share-options">
+        <span class='st_fblike_hcount' displayText='Facebook Like'></span>
+        <span class='st_plusone_hcount' displayText='Google +1'></span>
+
+    </div>
     <h5 style="text-align: center;"> This tool is under FISTUDIO&copy |Easy Exam Fetching Experience From 2002 - <?php echo date("Y")-1 ?> | We use cookie to enhance your fetching experience.</h5>
     <h5 style="text-align: center"> <a href="http://fistudio.net/?p=371" target="_blank" style="text-decoration: underline">Future Developments and change logs</a> | Report a bug to <a style="text-decoration: underline" href=mailto:service@fistudio.net>FISTUDIO</a> </h5>
 
