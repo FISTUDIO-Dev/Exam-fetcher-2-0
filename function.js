@@ -59,7 +59,9 @@ $(document).ready(function(){
 
 
     //Enable tooltip
-    $(document).tooltip();
+    $(document).tooltip({
+        position: { my: "right-15 center", at: "left center" }
+    });
 
     //Enable modal
     $modal = $('#modal-exam');
@@ -257,10 +259,24 @@ $(document).ready(function(){
             addField();
         }
     });
+
+    //Add share to facebook
+    stWidget.addEntry({
+        "service":"facebook",
+        "element":document.getElementById('fb-share'),
+        "url":document.domain,
+        "title":"Share exam fetcher on facebook",
+        "summary":"I am using exam fetcher from FIStudio! A great tool to easily view/download exams from VCAA website!"
+    });
+
+
 });
 
 
 $(window).load(function() {
+    //HIDE PRELOADER
+    hidePreloader();
+
     //Initialize data for extraction mode;
     extractionList = {
         'Specialist Math Formula Sheet':'specialist-math-formula-sheet.pdf',
@@ -294,6 +310,8 @@ $(window).load(function() {
             return false;
         }
     });
+
+
 
     //set mode
     mode = modeSet.SINGLE;
@@ -926,7 +944,7 @@ $('body').on('click','#share-exams',function(e){
             "service":"email",
             "element":document.getElementById('st_email'),
             "url":downloadURL,
-            "title":"Share exams to your friends' email!",
+            "title":"Share exams to facebook!",
             "type":"large",
             "summary":"Here's the link attached! Click to download now!"
         });

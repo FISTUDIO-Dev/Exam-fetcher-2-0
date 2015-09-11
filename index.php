@@ -62,7 +62,7 @@
 </head>
 
 <body>
-<div id="preloader" style="display: none">
+<div id="preloader">
     <div class="body">
   	<span>
       	<span></span>
@@ -136,16 +136,25 @@
         </div>
     </div>
 
+    <div class="modal-frame" id="modal-share">
+        <div class="modal">
+            <div class="modal-inset">
+                <div class="button close-modal" id="close-exam">Close</div>
+
+            </div>
+        </div>
+    </div>
+
     <div class="modal-overlay"></div>
 
     <!--- Floating Buttons -->
     <div id="container-floating">
 
-        <div class="nd3 nds">
-            <p class="letter"><i style="padding-top:20%;" class="fa fa-cog"></i></p>
+        <div title="Share to facebook" class="nd3 nds" id="fb-share">
+            <p class="letter"><i style="margin-top: 30%" class="fa fa-share-alt-square"></i></p>
         </div>
-        <div class="nd1 nds">
-            <p class="letter">E</p>
+        <div title="Unihigh Login" class="nd1 nds" id="unihigh-login">
+            <p class="letter"><i style="margin-top: 30%" class="fa fa-sign-in"></i></p>
         </div>
 
         <div id="floating-button">
