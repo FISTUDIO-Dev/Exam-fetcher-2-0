@@ -150,7 +150,7 @@
     <!--- Floating Buttons -->
     <div id="container-floating">
 
-        <div title="Share to facebook" class="nd3 nds" id="site_share">
+        <div title="Share exam fetcher" class="nd3 nds" id="site_share">
             <p class="letter" id="share_container"></p>
         </div>
         <div title="Unihigh Login" class="nd1 nds" id="unihigh-login">

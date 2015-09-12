@@ -266,10 +266,9 @@ $(document).ready(function(){
         "title":"Share exam fetcher to your friends!",
         "type":"large",
         "text":"Share this" ,
-        "summary":"Your spread will be a great support for us to improve!"
+        "summary":"I just downloaded VCAA exams using exam fetcher! A convenient tool for fetching exam! Go check it out!"
     });
 
-    //center tabs
 });
 
 
@@ -310,10 +309,6 @@ $(window).load(function() {
             return false;
         }
     });
-
-
-
-
     //set mode
     mode = modeSet.SINGLE;
 });
