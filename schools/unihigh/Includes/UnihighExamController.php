@@ -16,23 +16,67 @@ class UnihighExamController{
     }
 
     //Retrieve source for auto complete
-    public function obtain_initial_data_list($type){
-        $table_name = "exam_records";
-        $result = $this->conn->query("SELECT publisher FROM exam_records");
-        if ($re)
+    public function obtain_initial_data_list(){
+        $result = $this->conn->query("SELECT subject FROM exam_records");
+        if ($result->num_rows > 0){
+            //source data
+            $output = array();
+            while ($row = $result->fetch_assoc()){
+                array_push($output,$row['subject']);
+            }
+            return $output;
+        }else{
+            return ["No subjects available"];
+        }
     }
 
     //Retrieve data for a specific item
     public function request_data_source_update($type,$selected){
         //Load based on type first and load list to the next unlocked field
+        $current_subject = null; $current_publisher = null;
         switch ($type){
-            case "publisher":
-                //unlock subject
+            case "subject":{
+                $current_subject = $selected;
+                $query = "SELECT publisher FROM exam_records WHERE subject=".$selected;
+                $result = $this->conn->query($query);
+                if ($result->num_rows > 0){
+                    $output = array();
+                    while ($row = $result->fetch_assoc()){
+                        array_push($output,$row['publisher']);
+                    }
+                    return $output;
+                }else{
+                    return ["No publisher for this subject available"];
+                }
+            }
+                //unlock publisher
                 break;
-            case "subject":
+            case "publisher":{
+                $current_publisher = $selected;
+                $query = "SELECT year FROM exam_records WHERE subject=".$current_subject." AND publisher=".$selected;
+                $result = $this->conn->query($query);
+                if ($result->num_rows > 0){
+                    $output = array();
+                    while ($row = $result->fetch_assoc()){
+                        array_push($output,$row['year']);
+                    }
+                    return $output;
+                }else{
+                    return ["No year for this publisher available"];
+                }
+            }
                 //unlock year
                 break;
-            case "year":
+            case "year":{
+                $query = "SELECT file_path FROM exam_records WHERE subject=".$current_subject." AND publisher=".$current_publisher." AND year=".$selected;
+                $result = $this->conn->query($query);
+                if ($result->num_rows == 1){
+                    $row = $result->fetch_assoc();
+                    UnihighExamDownloader::downloadFile($row['file_path']);
+                }else{
+                    return "error";
+                }
+            }
                 //initialize download
                 break;
             default:

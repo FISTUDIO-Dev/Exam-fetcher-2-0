@@ -26,14 +26,14 @@ session_start();
         <form id="fetch_form" class="col s12 card-panel">
             <div class="row">
                 <div class="input-field col s12">
-                    <i class="material-icons prefix">library_books</i>
-                    <input type="text" placeholder="Search for a publisher" class="validate" id="publisher_text" name="publisher_text">
-                    <label for="publisher_text">Publisher</label>
-                </div>
-                <div class="input-field col s12">
                     <i class="material-icons prefix">subject</i>
                     <input type="text" placeholder="Search for a subject" class="validate" id="subject_text" name="subject_text">
                     <label for="subject_text">Subject</label>
+                </div>
+                <div class="input-field col s12">
+                    <i class="material-icons prefix">library_books</i>
+                    <input type="text" placeholder="Search for a publisher" class="validate" id="publisher_text" name="publisher_text">
+                    <label for="publisher_text">Publisher</label>
                 </div>
                 <div class="input-field col s12">
                     <i class="material-icons prefix">today</i>
