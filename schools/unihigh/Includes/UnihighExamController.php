@@ -4,19 +4,51 @@ require_once "db_conn.php";
 
 class UnihighExamController{
 
+    private $conn;
+
     //Constructor
     public function __constructor(){
         //establish mysql connection
-
+        $this->conn = new mysqli(dbConfig::server,dbConfig::username,dbConfig::password,dbConfig::dbname);
+        if ($this->conn->connect_error){
+            die("Connection failed with error".$this->conn->connect_error);
+        }
     }
 
-    //Retrieve data source for auto complete
-    public function obtain_datasource(){
-
+    //Retrieve source for auto complete
+    public function obtain_initial_data_list($type){
+        $table_name = "exam_records";
+        $result = $this->conn->query("SELECT publisher FROM exam_records");
+        if ($re)
     }
 
-    //Formulate date and invoke for download
-    public function  invoke_download($source){
+    //Retrieve data for a specific item
+    public function request_data_source_update($type,$selected){
+        //Load based on type first and load list to the next unlocked field
+        switch ($type){
+            case "publisher":
+                //unlock subject
+                break;
+            case "subject":
+                //unlock year
+                break;
+            case "year":
+                //initialize download
+                break;
+            default:
+                break;
+        }
+    }
+
+    //Formulate data and invoke for download
+    public function invoke_download($source){
+        if (is_array($source)){
+            //initialize bulk download
+            UnihighExamDownloader::downloadToZip($source);
+        }else{
+            //just a single url
+            UnihighExamDownloader::downloadFile($source);
+        }
 
     }
 
@@ -26,7 +58,7 @@ class UnihighExamDownloader{
     //Download to zip
     static function downloadToZip($data){
         // set cookie
-        setcookie('fileLoading',true,time()+10,'/');
+        setcookie('unihigh_download',true,time()+10,'/');
 
         //Create ZipArchive using Stream
         $zipStream = new ZipStream('exams.zip');

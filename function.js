@@ -508,6 +508,7 @@ $("body").on('submit','#sform',function(e){
     });
     e.preventDefault();
 
+
 });
 
 //Remove a subject field
@@ -1054,8 +1055,6 @@ $('#fav-add-btn').click(function(){
     //reload
     refreshUIFromLocalStorage();
 });
-
-
 
 //Analyse the result table and make up JSON data
 function analyseTable(tableID){
