@@ -153,7 +153,7 @@
         <div title="Share exam fetcher" class="nd3 nds" id="site_share">
             <p class="letter" id="share_container"></p>
         </div>
-        <div title="Unihigh Login" class="nd1 nds" id="unihigh-login">
+        <div title="Unihigh Login (Comming Soon)" class="nd1 nds" id="unihigh-login">
             <p class="letter"><i style="margin-top: 30%" class="fa fa-sign-in"></i></p>
         </div>
 

@@ -7,9 +7,10 @@ class UnihighExamController{
     private $conn;
 
     //Constructor
-    public function __constructor(){
+    public function __construct(){
         //establish mysql connection
         $this->conn = new mysqli(dbConfig::server,dbConfig::username,dbConfig::password,dbConfig::dbname);
+
         if ($this->conn->connect_error){
             die("Connection failed with error".$this->conn->connect_error);
         }
@@ -33,11 +34,9 @@ class UnihighExamController{
     //Retrieve data for a specific item
     public function request_data_source_update($type,$selected){
         //Load based on type first and load list to the next unlocked field
-        $current_subject = null; $current_publisher = null;
         switch ($type){
             case "subject":{
-                $current_subject = $selected;
-                $query = "SELECT publisher FROM exam_records WHERE subject=".$selected;
+                $query = "SELECT publisher FROM exam_records WHERE subject='$selected'";
                 $result = $this->conn->query($query);
                 if ($result->num_rows > 0){
                     $output = array();
@@ -52,8 +51,10 @@ class UnihighExamController{
                 //unlock publisher
                 break;
             case "publisher":{
-                $current_publisher = $selected;
-                $query = "SELECT year FROM exam_records WHERE subject=".$current_subject." AND publisher=".$selected;
+                $selected_bundle_unpacked = json_decode($_POST['selected'],true);
+                $current_subj = $selected_bundle_unpacked['subject'];
+                $current_pub = $selected_bundle_unpacked['publisher'];
+                $query = "SELECT year FROM exam_records WHERE subject='$current_subj' AND publisher='$current_pub'";
                 $result = $this->conn->query($query);
                 if ($result->num_rows > 0){
                     $output = array();
@@ -68,7 +69,11 @@ class UnihighExamController{
                 //unlock year
                 break;
             case "year":{
-                $query = "SELECT file_path FROM exam_records WHERE subject=".$current_subject." AND publisher=".$current_publisher." AND year=".$selected;
+                $selected_bundle_unpacked = json_decode($_POST['selected'],true);
+                $current_subj = $selected_bundle_unpacked['subject'];
+                $current_pub = $selected_bundle_unpacked['publisher'];
+                $current_year = $selected_bundle_unpacked['year'];
+                $query = "SELECT file_path FROM exam_records WHERE subject='$current_subj' AND publisher='$current_pub' AND year='$current_year'";
                 $result = $this->conn->query($query);
                 if ($result->num_rows == 1){
                     $row = $result->fetch_assoc();
@@ -84,6 +89,20 @@ class UnihighExamController{
         }
     }
 
+    public function request_single_download_url(){
+        $current_subj = $_POST['subject_text'];
+        $current_pub = $_POST['publisher_text'];
+        $current_year = $_POST['year_text'];
+        $query = "SELECT file_path FROM exam_records WHERE subject='$current_subj' AND publisher='$current_pub' AND year='$current_year'";
+        $result = $this->conn->query($query);
+        if ($result->num_rows == 1){
+            $row = $result->fetch_assoc();
+            return $row['file_path'];
+        }else{
+            return "error";
+        }
+    }
+
     //Formulate data and invoke for download
     public function invoke_download($source){
         if (is_array($source)){
@@ -91,7 +110,7 @@ class UnihighExamController{
             UnihighExamDownloader::downloadToZip($source);
         }else{
             //just a single url
-            UnihighExamDownloader::downloadFile($source);
+            UnihighExamDownloader::downloadFileFromServer($source);
         }
 
     }
@@ -154,5 +173,22 @@ class UnihighExamDownloader{
         fwrite($fo,$file);
         fclose($fo);
         return true;
+    }
+
+    static function downloadFileFromServer($file){
+        $file = $_SERVER['DOCUMENT_ROOT']."/schools/unihigh/repository/".$file;
+
+        if(!$file){ // file does not exist
+            die('file not found');
+        } else {
+            chmod($file,0777);
+            header("Cache-Control: public");
+            header("Content-Description: File Transfer");
+            header("Content-Disposition: attachment; filename=$file");
+            header("Content-Type: application/force-download");
+            header("Content-Transfer-Encoding: binary");
+            // read the file from disk
+            readfile($file);
+        }
     }
 }

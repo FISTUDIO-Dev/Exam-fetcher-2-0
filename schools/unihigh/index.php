@@ -1,5 +1,5 @@
 <?php
-session_start();
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -8,11 +8,12 @@ session_start();
     <title>Unihigh Exam Fetcher (Alpha)</title>
     <script src="../../assets/jquery-2.1.3.min.js"></script>
     <script src="../../assets/jquery-ui.js"></script>
-    <script src="../../assets/jquery-ui.css"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
-    <script src="../../assets/alert.js"></script>
     <script src="../../assets/jquery.cookie.js"></script>
+    <script src="../../assets/foundation.min.js"></script>
+    <script src="../../assets/alert.js"></script>
 
+    <link href="../../assets/jquery-ui.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css">
     <link rel="stylesheet" href="assets/style.css">
@@ -42,12 +43,13 @@ session_start();
                 </div>
             </div>
             <div class="row center-align">
-                <button type="submit" name="submit" class="btn waves-effect waves-light">Get the exam ! <i class="material-icons right">send</i></button>
+                <button id="submit" type="submit" name="submit" class="btn waves-effect waves-light">Get the exam ! <i class="material-icons right">send</i></button>
             </div>
         </form>
         <div class="row">
             <div class="center-align">This tool is under FIStudio&copy</div>
         </div>
     </div>
+<script src="function.js"></script>
 </body>
 </html>
