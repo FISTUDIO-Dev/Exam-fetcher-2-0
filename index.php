@@ -55,7 +55,7 @@
 
     <script type="text/javascript">var switchTo5x=true;</script>
     <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
-    <script type="text/javascript">stLight.options({publisher: "7bbc3094-02cb-416d-a3b2-513f8c5c2b05", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
+    <script type="text/javascript">stLight.options({publisher: "7bbc3094-02cb-416d-a3b2-513f8c5c2b05"});</script>
     <style>
 
     </style>
@@ -308,12 +308,7 @@
     <iframe id="pdf-frame" style="display: none">
 
     </iframe>
-    <!-- More Info -->
-    <div align="center" id="share-options">
-        <span class='st_fblike_hcount' displayText='Facebook Like'></span>
-        <span class='st_plusone_hcount' displayText='Google +1'></span>
 
-    </div>
     <h5 style="text-align: center;"> This tool is under FISTUDIO&copy |Easy Exam Fetching Experience From 2002 - <?php echo date("Y")-1 ?> | We use cookie to enhance your fetching experience.</h5>
     <h5 style="text-align: center"> <a href="http://fistudio.net/?p=371" target="_blank" style="text-decoration: underline">Future Developments and change logs</a> | Report a bug to <a style="text-decoration: underline" href=mailto:service@fistudio.net>FISTUDIO</a> </h5>
 
