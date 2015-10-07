@@ -283,7 +283,14 @@ $(window).load(function() {
         'Math Method Formula Sheet' : 'mathmethod-formula-sheet.pdf',
         'Physics Formula Sheet' : 'physics-formula-sheet.pdf'
     };
-
+    //Initialize extraction data for autocomplete
+    for (var key in extractionList){
+        extractionData.push(key);
+    }
+    $('#ext_subject').autocomplete({
+        source: extractionData,
+        autoFocus:true
+    });
 
     //prevent enter to submit in front form
     $(window).keydown(function (e) {
@@ -509,10 +516,7 @@ function removeField(){
     fieldSet--;
 }
 
-//Initialize extraction data for autocomplete
-for (var key in extractionList){
-    extractionData.push(key);
-}
+
 //link to source
 $('#field_div_id_0_subject').autocomplete({
     source: searchIndex,
@@ -522,10 +526,7 @@ $('#field_div_id_0_year').autocomplete({
     source: years,
     autoFocus:true
 });
-$('#ext_subject').autocomplete({
-    source: extractionData,
-    autoFocus:true
-});
+
 
 /* ========================== BACK FORM =========================== */
 
