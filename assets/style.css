@@ -150,8 +150,10 @@ html input[type="button"],
 input[type="reset"],
 input[type="submit"] {
     -webkit-appearance: button;
-    color: #fff;
-    cursor: pointer; }
+    cursor: pointer;
+    color:white;
+    background-color: #1ecd97;
+}
 
 button[disabled],
 html input[disabled] {

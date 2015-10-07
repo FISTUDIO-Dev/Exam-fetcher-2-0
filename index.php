@@ -53,9 +53,7 @@
 
     <link rel="stylesheet" href="assets/style.css" />
 
-    <script type="text/javascript">var switchTo5x=true;</script>
-    <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
-    <script type="text/javascript">stLight.options({publisher: "7bbc3094-02cb-416d-a3b2-513f8c5c2b05"});</script>
+
     <style>
 
     </style>
@@ -83,7 +81,7 @@
     </div>
 </div>
 <div class="centered grid__col--8" id="main" style="margin-top: 5%">
-    <h1 style="text-align: center">Welcome to VCAA Exam Fetcher V2.2.3 (Gamma).</h1>
+    <h1 style="text-align: center">Welcome to VCAA Exam Fetcher V2.2.5 (Gamma).</h1>
     <h3 style="text-align: center"><a id="advanced-settings" style="text-decoration: underline; cursor: pointer;"> <i class="fa fa-cogs"></i> Advanced Settings</a></h3>
 
     <!-- Context Menu Download options -->
@@ -314,6 +312,9 @@
 
 </div>
 <script src="assets/php.js" type="text/javascript"></script>
+<script type="text/javascript">var switchTo5x=true;</script>
+<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+<script type="text/javascript">stLight.options({publisher: "7bbc3094-02cb-416d-a3b2-513f8c5c2b05"});</script>
 <script src="function.js" type="text/javascript"></script>
 <script>
     //tracking

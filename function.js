@@ -284,23 +284,6 @@ $(window).load(function() {
         'Physics Formula Sheet' : 'physics-formula-sheet.pdf'
     };
 
-    //Initialize extraction data for autocomplete
-    for (var key in extractionList){
-        extractionData.push(key);
-    }
-    //link to source
-    $('#field_div_id_0_subject').autocomplete({
-        source: searchIndex,
-        autoFocus:true
-    });
-    $('#field_div_id_0_year').autocomplete({
-        source: years,
-        autoFocus:true
-    });
-    $('#ext_subject').autocomplete({
-        source: extractionData,
-        autoFocus:true
-    });
 
     //prevent enter to submit in front form
     $(window).keydown(function (e) {
@@ -526,6 +509,23 @@ function removeField(){
     fieldSet--;
 }
 
+//Initialize extraction data for autocomplete
+for (var key in extractionList){
+    extractionData.push(key);
+}
+//link to source
+$('#field_div_id_0_subject').autocomplete({
+    source: searchIndex,
+    autoFocus:true
+});
+$('#field_div_id_0_year').autocomplete({
+    source: years,
+    autoFocus:true
+});
+$('#ext_subject').autocomplete({
+    source: extractionData,
+    autoFocus:true
+});
 
 /* ========================== BACK FORM =========================== */
 
@@ -706,15 +706,7 @@ function linkSource(){
         autoFocus:true
     });
 
-    $('#bulk_subject').textext({
-        plugins: 'autocomplete suggestions tags filter',
-        suggestions: searchIndex
-    });
 
-    $('#bulk_year').textext({
-        plugins: 'autocomplete suggestions tags filter',
-        suggestions: years
-    });
     $('#bulk_year').focusin(function(e){
         $('#quick_year_selector').slideDown();
     });
@@ -1027,6 +1019,15 @@ $('body').on('click','#reset-table',function(e){
     }
     if (mode == modeSet.BULK){
         document.getElementById('bulk').innerHTML = '<form id="bform" method="post"> <div class="checkboxes" style="display: inline-block;margin: 0 auto;width:100%"> <p align="center"> <label> <input type="checkbox" class="checkbox" name="bulkPaperChecked" checked/> Exams |</label> <label> <input type="checkbox" class="checkbox" name="bulkReportChecked" checked/> Assessment reports </label> </p></div><div style=""> <h5>Enter your subjects:</h5> <input id="bulk_subject" placeholder="Type a few characters and select a subject" name="bulk_subject" class="form__input" style="width: 100% !important;"/> <h6>Notice: For subjects, please enter the name of subject from the beginning:<br/> E.g. When searching for "English As Additional Language", you should start by typing "Eng.." instead of "EAL". </h6> <h5>Enter years:</h5> <input id="bulk_year" placeholder="Type a few characters and select a year" name="bulk_year" class="form__input" style="width:100%; !important;"/> <div id="quick_year_selector" style="display: none"> <h3 style="text-align: center"><strong>OR</strong></h3> <h5>Get exams from a consecutive number of years! E.g. All the way from 2002 to 2014! </h5> <h5>From Year: <input type="text" name="from-year" id="from-year" class="form__input" style="display: inline;width: 20%"/> To Year: <input type="text" name="to-year" id="to-year" class="form__input" style="display: inline; width: 20%;"> </div></div><input type="submit" id="submit" name="submit" value="Click to view the exams!" style="margin-top: 20px"> <input type="hidden" id="modeIndicator" name="modeIndicator" value="1"> <input type="hidden" name="action" id="action" value="fetch"> </form>';
+        $('#bulk_subject').textext({
+            plugins: 'autocomplete suggestions tags filter',
+            suggestions: searchIndex
+        });
+
+        $('#bulk_year').textext({
+            plugins: 'autocomplete suggestions tags filter',
+            suggestions: years
+        });
     }
     //Link source for autocomplete
     linkSource();
