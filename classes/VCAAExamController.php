@@ -1,7 +1,10 @@
 <?php
-
-namespace VCAA;
-
+/**
+ * Created by PhpStorm.
+ * User: JackieChung
+ * Date: 27/06/15
+ * Time: 7:49 PM
+ */
 define("BASE_URL",$_SERVER['DOCUMENT_ROOT']."/");
 define("LIB_URL",BASE_URL.'libs/');
 define("TEMP_URL",BASE_URL.'temp/');
@@ -16,7 +19,7 @@ abstract class ExamFetchingMode{
     const TIME_FRAME = 2;
 }
 
-class VCAAExamFetchController {
+class VCAAExamController {
 
     /***** Variables *****/
 
@@ -103,6 +106,8 @@ class VCAAExamFetchController {
     private function loopThroughSubjects($subjects_array = array(),$year_array = array()){
         $innerArray = array(); $outArray = array();
         for ($i = 0 ; $i < count($subjects_array); $i ++){
+            error_log($i);
+            error_log($subjects_array[$i].": Subject Array[i]");
             //Retrieve DOM
             $subjectDom = file_get_html($this->findGeneralSubjectURL((string)$subjects_array[$i]),false,self::$context);
             //Get Exam Table from DOM
