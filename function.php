@@ -1,9 +1,11 @@
 <?php
-
-require_once "vendor/autoload.php";
-
-use VCAA\VCAAExamFetchController;
-use VCAA\VCAAExamDownloader;
+/**
+ * Created by PhpStorm.
+ * User: JackieChung
+ * Date: 28/06/15
+ * Time: 6:39 PM
+ */
+require_once "classes/VCAAExamController.php";
 
 /*** GET METHODS ***/
 if (isset($_GET['remotedownload'])){
@@ -22,7 +24,7 @@ if ($_POST['action'] == "download-zip"){
     VCAAExamDownloader::downloadToZip($downloadData);
 
 }else if($_POST['action'] == "single-download"){
-    $url = VCAAExamFetchController::getBaseURLToLoad().$_POST['download'];
+    $url = VCAAExamController::getBaseURLToLoad().$_POST['download'];
     //download
     VCAAExamDownloader::downloadFile($url);
 }
@@ -52,7 +54,7 @@ else if($_POST['action'] == "fetch")
         $singleModePaperChecked = $_POST['singlePaperChecked'];
         $singleModeReportChecked = $_POST['singleReportChecked'];
         //Construct controller
-        $controller = new VCAAExamFetchController($singleModePaperChecked,$singleModeReportChecked,$modeIndicator);
+        $controller = new VCAAExamController($singleModePaperChecked,$singleModeReportChecked,$modeIndicator);
         echo $controller->output();
         exit();
     }
@@ -62,7 +64,7 @@ else if($_POST['action'] == "fetch")
         $bulkModePaperChecked = $_POST['bulkPaperChecked'];
         $bulkModeReportChecked = $_POST['bulkReportChecked'];
         //Construct controller
-        $controller = new VCAAExamFetchController($bulkModePaperChecked,$bulkModeReportChecked,$modeIndicator);
+        $controller = new VCAAExamController($bulkModePaperChecked,$bulkModeReportChecked,$modeIndicator);
         // get datas
         $subj_arr = $_POST['bulk_subject'];
         $year_arr = $_POST['bulk_year'];
